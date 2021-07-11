@@ -4,10 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Enemy
-  - RangedEnemy
   - MeleeEnemy
+  - RangedEnemy
   - Boss
+  - Enemies
+  - Collidables
   layers:
   - Default
   - TransparentFX
@@ -17,8 +18,8 @@ TagManager:
   - UI
   - 
   - 
-  - Characters
-  - Interactables
+  - characters
+  - interactables
   - 
   - 
   - 
@@ -45,12 +46,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Background
+  - name: background
     uniqueID: 1903656455
     locked: 0
-  - name: Characters
+  - name: characters
     uniqueID: 1014066069
     locked: 0
-  - name: Foreground
+  - name: foreground
     uniqueID: 72584405
     locked: 0

@@ -76,18 +76,17 @@ public class BowHandler : MonoBehaviour
         transform.position = player.transform.position + (configSO.OffsetFromPlayer * playerToMouseDirection.normalized);
     }
 
-    public void FireArrows(ArrowConfigurationSO currentArrrowType, Transform arrowTrigger)
+    public void FireArrows(ArrowConfigurationSO currentArrrow, Transform arrowTrigger)
     {
         var arrowToFire = arrowInstanceQuiver.Dequeue().GetComponent<ArrowHandler>();
-        arrowToFire.ConfigSO = currentArrrowType;
-        arrowToFire.onImpact += EnqueueArrow;
+        arrowToFire.ConfigSO = currentArrrow;
+        arrowToFire.onImpactOrExpiration += EnqueueArrow;
         arrowToFire.Setup(arrowTrigger.position, arrowTrigger.rotation);
         arrowToFire.gameObject.SetActive(true);
-        Debug.Log(arrowTrigger.rotation);
     }
 
-    private void EnqueueArrow()
+    private void EnqueueArrow(GameObject sender)
     {
-
+        arrowInstanceQuiver.Enqueue(sender);
     }
 }

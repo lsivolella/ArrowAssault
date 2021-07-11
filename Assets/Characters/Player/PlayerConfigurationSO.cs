@@ -11,8 +11,9 @@ public class PlayerConfigurationSO : ScriptableObject
     [SerializeField] float freezeDuration = 0.6f;
     [Header("Movement Variables")]
     [SerializeField] float moveSpeed = 5f;
-    [Header("Arrow Types")]
-    [SerializeField] ArrowConfigurationSO[] arrowTypes;
+    [Header("Projectile")]
+    [SerializeField] ArrowConfigurationSO defaultProjectile;
+    [SerializeField] ArrowConfigurationSO currentProjectile;
 
     public float Health { get { return health; } }
     public AudioClip OnDamageAudioClip { get { return onDamageAudioClip; } }
@@ -20,5 +21,6 @@ public class PlayerConfigurationSO : ScriptableObject
     public float FlinchDuration { get { return flinchDuration; } }
     public float FreezeDuration { get { return freezeDuration; } }
     public float MoveSpeed { get { return moveSpeed; } }
-    public ArrowConfigurationSO[] ArrowType { get { return arrowTypes; } }
+    public ArrowConfigurationSO DefaultProjectile { get { return defaultProjectile; } }
+    public ArrowConfigurationSO CurrentProjectile { get { return currentProjectile; } set { currentProjectile = value; } }
 }

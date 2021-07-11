@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrowType: 0
   arrowSprite: {fileID: 21300000, guid: ade40d949b619b545bd9c4b057950537, type: 3}
-  arrowSpeed: 1
+  arrowSpeed: 5
   arrowDamage: 1
+  lifeExpectancy: 2
+  thematicColor: {r: 1, g: 1, b: 1, a: 1}

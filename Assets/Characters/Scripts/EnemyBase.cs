@@ -20,7 +20,6 @@ public class EnemyBase : CharacterBase
     private LootDrop lootDrop;
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
-    private BoxCollider2D boxCollider;
     private Animator animator;
 
     // move to given position
@@ -29,6 +28,8 @@ public class EnemyBase : CharacterBase
 
     protected override void OnAwake()
     {
+        base.OnAwake();
+
         GetComponents();
 
         originalColor = spriteRenderer.color;
@@ -40,12 +41,13 @@ public class EnemyBase : CharacterBase
         lootDrop = GetComponent<LootDrop>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
-        boxCollider = GetComponent<BoxCollider2D>();
         animator = GetComponent<Animator>();
     }
 
     protected override void OnStart()
     {
+        base.OnStart();
+
         Target = GameObject.FindGameObjectWithTag("Player");
         // TODO: make pubject puller inform the enemy of the player object. test performance?
         healthSystem.Setup(configSO.Health);
@@ -69,12 +71,14 @@ public class EnemyBase : CharacterBase
         //TODO: implement enemy object pulling
         //TODO: implement a little puff smoke
         spriteRenderer.enabled = false;
-        boxCollider.enabled = false;
+        BoxCollider.enabled = false;
         //Destroy(gameObject);
     }
 
     protected override void OnUpdate()
     {
+        base.OnUpdate();
+
         ProcessMovement();
     }
 
@@ -90,9 +94,9 @@ public class EnemyBase : CharacterBase
 
         var pos = transform.position;
 
-        var rayCastX = Physics2D.BoxCast(pos, boxCollider.size / 1.5f, 0, new Vector2(MoveDirection.x, 0),
+        var rayCastX = Physics2D.BoxCast(pos, BoxCollider.size / 1.5f, 0, new Vector2(MoveDirection.x, 0),
             Mathf.Abs(MoveDirection.x * configSO.MoveSpeed * Time.deltaTime), LayerMask.GetMask("Characters", "Interactables"));
-        var rayCastY = Physics2D.BoxCast(pos, boxCollider.size / 1.5f, 0, new Vector2(0, MoveDirection.y),
+        var rayCastY = Physics2D.BoxCast(pos, BoxCollider.size / 1.5f, 0, new Vector2(0, MoveDirection.y),
             Mathf.Abs(MoveDirection.y * configSO.MoveSpeed * Time.deltaTime), LayerMask.GetMask("Characters", "Interactables"));
 
         if (rayCastX.collider == null)

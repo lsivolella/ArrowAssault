@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class Collectable : Collidable
 {
-    protected bool hasBeenCollected = false;
-
     protected override void OnCollideEnter(Collider2D collider)
     {
         if (!collider.gameObject.CompareTag("Player")) return;
 
-        OnCollect();
+        OnCollect(collider);
     }
 
-    protected virtual void OnCollect()
-    {
-        hasBeenCollected = true;
-        Debug.Log("I have been collected");
-    }
+    protected virtual void OnCollect(Collider2D collider) { }
 }
