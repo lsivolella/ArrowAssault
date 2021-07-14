@@ -31,7 +31,7 @@ public class ProjectileUIController : MonoBehaviour
         currentArrowType = newProjectile.ArrowType;
     }
 
-    public void UpdateAmmoCount(int amount)
+    public void UpdateAmmoCount(int currentAmmo)
     {
         if (currentArrowType.Equals(ArrowType.RegularArrow))
         {
@@ -42,7 +42,7 @@ public class ProjectileUIController : MonoBehaviour
         {
             xText.enabled = true;
             ammunitionText.enabled = true;
-            ammunitionText.text = amount.ToString();
+            ammunitionText.text = currentAmmo.ToString();
         }
             
     }

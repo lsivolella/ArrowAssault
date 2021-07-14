@@ -142,6 +142,7 @@ GameObject:
   - component: {fileID: 6898276940731827038}
   - component: {fileID: 6898276940731827035}
   - component: {fileID: 242992435956647326}
+  - component: {fileID: 3139475474408656009}
   - component: {fileID: 6898276940731827033}
   - component: {fileID: 6898276940731827032}
   - component: {fileID: 6898276940731827039}
@@ -193,6 +194,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf1a9c914626f6f418512c7f5f715415, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
+  destroyBarUponDeath: 0
+--- !u!114 &3139475474408656009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6898276940731827034}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8f723a91affe624abc8c1454cde8655, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  poolConfigSO: {fileID: 11400000, guid: 882734a15c3ee094f965168c949f2391, type: 2}
 --- !u!212 &6898276940731827033
 SpriteRenderer:
   m_ObjectHideFlags: 0

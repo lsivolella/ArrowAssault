@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d33aa8ba32115ac4097997863ea6bbae, type: 3}
-  m_Name: player_configuration_so
+  m_Script: {fileID: 11500000, guid: 0267daf197158e949977d8dfcfd97974, type: 3}
+  m_Name: green_monster_configuration_so
   m_EditorClassIdentifier: 
-  health: 6
+  meleeDamage: 1
+  health: 5
   onDamageAudioClip: {fileID: 0}
   onDamageClipVolume: 0.7
   flinchDuration: 0.6
   freezeDuration: 0.6
-  moveSpeed: 5
-  defaultProjectile: {fileID: 11400000, guid: f2c81ff96301be04ea6a263d9cf7a8c6, type: 2}
-  currentProjectile: {fileID: 11400000, guid: f2c81ff96301be04ea6a263d9cf7a8c6, type: 2}
+  moveSpeed: 1

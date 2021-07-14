@@ -112,6 +112,7 @@ public class PlayerBase : CharacterBase
         audioSource?.PlayOneShot(configSO.OnDamageAudioClip, configSO.OnDamageClipVolume);
         
         healthSystem.TakeDamage(amount);
+        OnDamageTaken(healthSystem.CurentHealth);
 
         if (healthSystem.CurentHealth > 0) return;
 
@@ -132,13 +133,13 @@ public class PlayerBase : CharacterBase
             currentAmmunition = amount;
             configSO.CurrentProjectile = newProjectile;
         }
-        UpdateProjectileEvents(newProjectile, amount);
+        UpdateProjectileEvents(newProjectile, currentAmmunition);
     }
 
-    public void UpdateProjectileEvents(ArrowConfigurationSO newProjectile, int amount)
+    public void UpdateProjectileEvents(ArrowConfigurationSO newProjectile, int currentAmmo)
     {
         OnProjectileUpdate(newProjectile);
-        OnAmmoUpdate(amount);
+        OnAmmoUpdate(currentAmmo);
     }
 
     private void OnProjectileUpdate(ArrowConfigurationSO newProjectile)
@@ -148,6 +149,6 @@ public class PlayerBase : CharacterBase
 
     private void OnAmmoUpdate(int currentAmmo)
     {
-        if (onAmmoUpdate != null) { onAmmoUpdate(currentAmmunition); }
+        if (onAmmoUpdate != null) { onAmmoUpdate(currentAmmo); }
     }
 }

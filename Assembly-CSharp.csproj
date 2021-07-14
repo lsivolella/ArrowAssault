@@ -57,23 +57,25 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\OldStructure\Scripts\QuitGameButtonScript.cs" />
-    <Compile Include="Assets\Characters\Scripts\EnemiesConfigurationSO.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\EnemiesConfigurationSO.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Player\PlayerProjectileScript.cs" />
     <Compile Include="Assets\SupportScripts\Collidable.cs" />
-    <Compile Include="Assets\Characters\Scripts\HealthSystem.cs" />
+    <Compile Include="Assets\Characters\HealthSystem\HealthSystem.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Bosses\BossProjectileController.cs" />
     <Compile Include="Assets\OldStructure\Scripts\MusicPlayer.cs" />
+    <Compile Include="Assets\Characters\HealthSystem\IHealthBar.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Enemies\EnemyMeleeScript.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Enemies\EnemyNonSeekerProjectileScript.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Enemies\EnemyStandardScript.cs" />
     <Compile Include="Assets\OldStructure\Scripts\InstantiateWithAngle.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\RangedEnemyBase.cs" />
     <Compile Include="Assets\OldStructure\Scripts\RestartGameButtonScript.cs" />
     <Compile Include="Assets\Managers\UI\AmmunitionUI\ProjectileUIController.cs" />
-    <Compile Include="Assets\Characters\Scripts\EnemyBase.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\EnemyBase.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Player\BowController.cs" />
     <Compile Include="Assets\OldStructure\Scripts\LootDrop.cs" />
     <Compile Include="Assets\Items\Bow\BowConfigurationSO.cs" />
-    <Compile Include="Assets\Items\Arrows\Scripts\ArrowHandler.cs" />
+    <Compile Include="Assets\Items\Projectiles\Arrows\Scripts\ArrowHandler.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Player\ArrowPickup.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Player\ChangeBowSprite.cs" />
     <Compile Include="Assets\Managers\UI\UIController.cs" />
@@ -84,22 +86,29 @@
     <Compile Include="Assets\SupportScripts\Collectable.cs" />
     <Compile Include="Assets\OldStructure\Scripts\ReticleController.cs" />
     <Compile Include="Assets\OldStructure\Scripts\StartGameButtonScript.cs" />
-    <Compile Include="Assets\Items\Arrows\Scripts\ArrowConfigurationSO.cs" />
+    <Compile Include="Assets\Items\Projectiles\Arrows\Scripts\ArrowConfigurationSO.cs" />
+    <Compile Include="Assets\Items\Projectiles\Scripts\ProjectileController.cs" />
     <Compile Include="Assets\SupportScripts\Timer.cs" />
     <Compile Include="Assets\OldStructure\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\Items\Projectiles\Scripts\ProjectilePoolController.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Bosses\BossController.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Enemies\EnemySeekerProjectileScript.cs" />
+    <Compile Include="Assets\Characters\HealthSystem\SliderHealthBar\SliderHealthBarController.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Player\BowPickup.cs" />
     <Compile Include="Assets\OldStructure\Scripts\MenuButtonScript.cs" />
+    <Compile Include="Assets\SupportScripts\Object.cs" />
     <Compile Include="Assets\Items\Bow\BowHandler.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Enemies\EnemyRangedScript.cs" />
-    <Compile Include="Assets\Characters\Scripts\MeleeEnemyBase.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\MeleeEnemyBase.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Player\PlayerController.cs" />
+    <Compile Include="Assets\Characters\HealthSystem\HeartsLifebar\HeartsHealthBarController.cs" />
     <Compile Include="Assets\Characters\Player\PlayerBase.cs" />
     <Compile Include="Assets\Characters\Player\PlayerConfigurationSO.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\RangedEnemyConfigurationSO.cs" />
     <Compile Include="Assets\OldStructure\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\OldStructure\Scripts\EmptyLootScript.cs" />
-    <Compile Include="Assets\SupportScripts\Object.cs" />
+    <Compile Include="Assets\Items\Projectiles\Scripts\ProjectilePoolConfigurationSO.cs" />
+    <Compile Include="Assets\Items\Projectiles\Scripts\ProjectileConfigurationSO.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
