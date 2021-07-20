@@ -20,16 +20,21 @@ public class Timer
         }
         private Action callback;
 
-        public void Setup(float amount, Action callback, bool runOnce)
+        private bool canRun;
+
+        public void Setup(float amount, Action callback, bool runOnce, bool canRun = true)
         {
             timer = 0f;
             timerMax = amount;
             this.callback = callback;
             this.runOnce = runOnce;
+            this.canRun = canRun;
         }
 
         private void Update()
         {
+            if (!canRun) return;
+
             timer += Time.deltaTime;
 
             if (timer >= timerMax)
@@ -47,6 +52,11 @@ public class Timer
             }
         }
 
+        public void Resolve()
+        {
+            timer = timerMax;
+        }
+
         public void Close()
         {
             if (gameObject == null) return;
@@ -56,29 +66,51 @@ public class Timer
 
     private TimerMonoBehaviour timerBehaviour;
     private readonly string name;
-    private readonly float amount;
+    private float amount;
     private readonly bool runOnce;
     private readonly Action callback;
+    private bool runOnRestart;
 
-    public Timer(string name, float amount, Action callback, bool runOnce = false)
+    public float Completion { get { return GetCurrentTime() / amount * 100f; } }
+
+    public Timer(string name, float amount, Action callback, bool runOnce = false, bool runOnRestart = false)
     {
         this.name = name;
         this.amount = amount;
         this.callback = callback;
         this.runOnce = runOnce;
+        this.runOnRestart = runOnRestart;
 
         InstantiateTimer();
     }
 
     public void Restart()
     {
+        runOnRestart = false;
         if (timerBehaviour != null)
         {
+            timerBehaviour.gameObject.SetActive(true);
             timerBehaviour.Setup(amount, callback, runOnce);
             return;
         }
 
         InstantiateTimer();
+    }
+
+    public void Restart(float amountTime)
+    {
+        amount = amountTime;
+        Restart();
+    }
+
+    public void Resolve()
+    {
+        timerBehaviour.Resolve();
+    }
+
+    public void Stop()
+    {
+        timerBehaviour.gameObject.SetActive(false);
     }
 
     private void InstantiateTimer()
@@ -94,7 +126,7 @@ public class Timer
 
         timerBehaviour = new GameObject(name).AddComponent<TimerMonoBehaviour>();
         timerBehaviour.transform.SetParent(timersRef.transform);
-        timerBehaviour.Setup(amount, callback, runOnce);
+        timerBehaviour.Setup(amount, callback, runOnce, !runOnRestart);
     }
 
     public void Close()

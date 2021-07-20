@@ -10,8 +10,15 @@ public abstract class CharacterBase : Collidable
 
     // make event onHeartSystemUpgrade (for when the player purchase the four hearts pieces system)
 
+    public virtual void TakeDamage(float amount) { }
+
     protected virtual void OnDamageTaken(float currentHealth)
     {
         if (onDamageTaken != null) { onDamageTaken(currentHealth); }
+    }
+
+    protected virtual void OnDeath()
+    {
+        if (onDeath != null) { onDeath(); }
     }
 }

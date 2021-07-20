@@ -4,19 +4,10 @@ using UnityEngine;
 
 public class BowHandler : MonoBehaviour
 {
-    [System.Serializable]
-    public class InstanceQuiver
-    {
-        public GameObject arrowPrefab;
-        public int quiverSize;
-    }
-
     [SerializeField] BowConfigurationSO configSO;
-    [SerializeField] InstanceQuiver instanceQuiver;
 
-    private readonly Queue<GameObject> arrowInstanceQuiver = new Queue<GameObject>();
-    private const string ARROW_PARENT = "Arrows";
-    private GameObject arrowParent;
+    public BowConfigurationSO ConfigSO { get { return configSO; } }
+
     private PlayerBase player;
     private SpriteRenderer spriteRenderer;
 
@@ -33,29 +24,7 @@ public class BowHandler : MonoBehaviour
 
     private void Start()
     {
-        spriteRenderer.sprite = configSO.BowSprite;
-
-        CreateArrowParent();
-        PopulateInstanceQuiver();
-    }
-
-    private void CreateArrowParent()
-    {
-        arrowParent = GameObject.Find(ARROW_PARENT);
-        if (arrowParent) return;
-
-        arrowParent = new GameObject(ARROW_PARENT);
-    }
-
-    private void PopulateInstanceQuiver()
-    {
-        for (int i = 0; i < instanceQuiver.quiverSize; i++)
-        {
-            GameObject arrow = Instantiate(instanceQuiver.arrowPrefab);
-            arrow.transform.SetParent(arrowParent.transform);
-            arrow.SetActive(false);
-            arrowInstanceQuiver.Enqueue(arrow);
-        }
+        spriteRenderer.sprite = ConfigSO.BowSprite;
     }
 
     private void Update()
@@ -73,20 +42,6 @@ public class BowHandler : MonoBehaviour
         // Bow rotation around player's pivot point
         Vector3 playerToMouseDirection = Camera.main.ScreenToWorldPoint(Input.mousePosition) - player.transform.position;
         playerToMouseDirection.z = 0;
-        transform.position = player.transform.position + (configSO.OffsetFromPlayer * playerToMouseDirection.normalized);
-    }
-
-    public void FireArrows(ArrowConfigurationSO currentArrrow, Transform arrowTrigger)
-    {
-        var arrowToFire = arrowInstanceQuiver.Dequeue().GetComponent<ArrowHandler>();
-        arrowToFire.ConfigSO = currentArrrow;
-        arrowToFire.onImpactOrExpiration += EnqueueArrow;
-        arrowToFire.Setup(arrowTrigger.position, arrowTrigger.rotation);
-        arrowToFire.gameObject.SetActive(true);
-    }
-
-    private void EnqueueArrow(GameObject sender)
-    {
-        arrowInstanceQuiver.Enqueue(sender);
+        transform.position = player.transform.position + (ConfigSO.OffsetFromPlayer * playerToMouseDirection.normalized);
     }
 }

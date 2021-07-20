@@ -15,12 +15,12 @@ GameObject:
   - component: {fileID: 3782701688603480470}
   - component: {fileID: 3782701688603480471}
   m_Layer: 8
-  m_Name: melee_mole_prefab
+  m_Name: mole_prefab
   m_TagString: Enemies
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3782701688603480464
 Transform:
   m_ObjectHideFlags: 0
@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a6dddfa652e114987ffe5aaf8154ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lootConfigSO: {fileID: 11400000, guid: 1087cd696c06061468b7a44ed870d23d, type: 2}
   configSO: {fileID: 11400000, guid: cb67b656b0a5e9a47a432548eec69e56, type: 2}
 --- !u!114 &1343277300102599535
 MonoBehaviour:

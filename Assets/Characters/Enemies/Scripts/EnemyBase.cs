@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyBase : CharacterBase
 {
+    [SerializeField] LootDropConfigurationSO lootConfigSO;
     [SerializeField] EnemiesConfigurationSO configSO;
 
     // Sprite Color Variables
@@ -19,10 +20,13 @@ public class EnemyBase : CharacterBase
 
     // General Cached References
     private HealthSystem healthSystem;
-    private LootDrop lootDrop;
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
     private Animator animator;
+    private LootController lootController;
+    private ObjectPooler lootPooler;
+
+    public Animator Animator { get { return animator; } }
 
     // take damage (-life and damage blink)
     // finder?
@@ -34,12 +38,13 @@ public class EnemyBase : CharacterBase
         GetComponents();
 
         originalColor = spriteRenderer.color;
+        lootController = new LootController(this, lootConfigSO);
+
     }
 
     private void GetComponents()
     {
         healthSystem = GetComponent<HealthSystem>();
-        lootDrop = GetComponent<LootDrop>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
@@ -50,11 +55,10 @@ public class EnemyBase : CharacterBase
         base.OnStart();
 
         Target = GameObject.FindGameObjectWithTag("Player");
-        // TODO: make pubject puller inform the enemy of the player object. test performance?
         healthSystem.Setup(configSO.Health);
     }
 
-    public void TakeDamage(float amount)
+    public override void TakeDamage(float amount)
     {
         //audioSource?.PlayOneShot(configSO.OnDamageAudioClip, configSO.OnDamageClipVolume);
         
@@ -68,10 +72,11 @@ public class EnemyBase : CharacterBase
 
     private void KillEnemy()
     {
+        OnDeath();
         IsAlive = false;
-        lootDrop?.GetLootDrop();
         //TODO: implement enemy object pulling
         //TODO: implement a little puff smoke
+        // TODO: just deactivate enemy
         animator.enabled = false;
         spriteRenderer.enabled = false;
         BoxCollider.enabled = false;

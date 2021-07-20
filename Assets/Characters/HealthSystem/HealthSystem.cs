@@ -52,6 +52,12 @@ public class HealthSystem : MonoBehaviour
 
         if (CurentHealth == 0 && destroyBarUponDeath)
             Destroy(healthBar);
+    }
 
+    public void Heal(float amount)
+    {
+        CurentHealth += amount;
+
+        CurentHealth = Mathf.Clamp(CurentHealth, 0, BaseHealth);
     }
 }

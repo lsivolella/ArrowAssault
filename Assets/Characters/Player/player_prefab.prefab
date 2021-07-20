@@ -76,10 +76,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   configSO: {fileID: 11400000, guid: e9989d358cbc12742ae1f7fca02f3603, type: 2}
-  instanceQuiver:
-    arrowPrefab: {fileID: 4795103778283260976, guid: 9f0e1c677d4876546be06e487dfb7f81,
-      type: 3}
-    quiverSize: 30
 --- !u!212 &3381995743863381802
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -142,7 +138,6 @@ GameObject:
   - component: {fileID: 6898276940731827038}
   - component: {fileID: 6898276940731827035}
   - component: {fileID: 242992435956647326}
-  - component: {fileID: 3139475474408656009}
   - component: {fileID: 6898276940731827033}
   - component: {fileID: 6898276940731827032}
   - component: {fileID: 6898276940731827039}
@@ -182,6 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configSO: {fileID: 11400000, guid: 35a4e72d196194a4e82a902ca07a1f07, type: 2}
   arrowTrigger: {fileID: 4228082755322234135}
+  arrowPoolConfigSO: {fileID: 11400000, guid: 882734a15c3ee094f965168c949f2391, type: 2}
 --- !u!114 &242992435956647326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,19 +192,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
   destroyBarUponDeath: 0
---- !u!114 &3139475474408656009
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6898276940731827034}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8f723a91affe624abc8c1454cde8655, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  poolConfigSO: {fileID: 11400000, guid: 882734a15c3ee094f965168c949f2391, type: 2}
 --- !u!212 &6898276940731827033
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -48,6 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1a6dddfa652e114987ffe5aaf8154ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lootConfigSO: {fileID: 11400000, guid: f012acce4801622479f5e8aabea48d37, type: 2}
   configSO: {fileID: 11400000, guid: 3a6d0479a2ee74c4da1d08efe182cf17, type: 2}
 --- !u!114 &7346307673661980995
 MonoBehaviour:

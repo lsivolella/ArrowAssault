@@ -7,16 +7,22 @@ public class PlayerBase : CharacterBase
 {
     [SerializeField] PlayerConfigurationSO configSO;
     [SerializeField] Transform arrowTrigger;
+    [SerializeField] PoolConfigurationSO arrowPoolConfigSO; 
 
     public event Action<ArrowConfigurationSO> onProjectileUpdate; 
     public event Action<int> onAmmoUpdate;
 
     // General Cached References
+    private ObjectPooler projectilesPool;
     private HealthSystem healthSystem;
     private SpriteRenderer spriteRenderer;
     private AudioSource audioSource;
     private Animator animator;
     private BowHandler bowHandler;
+
+    private Timer timer;
+
+    public bool CanAttack { get; private set; } = true;
 
     private Vector2 movement;
     private int currentAmmunition;
@@ -26,6 +32,8 @@ public class PlayerBase : CharacterBase
         base.OnAwake();
 
         GetComponents();
+
+        projectilesPool = new ObjectPooler(this.gameObject, arrowPoolConfigSO);
     }
 
     private void GetComponents()
@@ -86,11 +94,32 @@ public class PlayerBase : CharacterBase
 
     private void ProcessFireInput()
     {
-        if (!Input.GetButtonDown("Fire1")) return;
+        if (!Input.GetButton("Fire1")) return;
+
+        if (!CanAttack) return;
 
         if (!configSO.CurrentProjectile.ArrowType.Equals(ArrowType.RegularArrow))
             SpendAmmo();
-        bowHandler.FireArrows(configSO.CurrentProjectile, arrowTrigger);     
+
+        CanAttack = false;
+
+        var tag = projectilesPool.GenerateRandomTag();
+        var projectile = projectilesPool.DequeueObject(tag).GetComponent<ArrowHandler>();
+        projectile.ArrowConfigSO = configSO.CurrentProjectile;
+        projectile.Setup(arrowTrigger.transform.position, arrowTrigger.rotation, null);
+        projectile.onImpactOrExpiration += EnqueueProjectile;
+
+        timer = new Timer(gameObject.name + "attack_cooldown",
+            bowHandler.ConfigSO.ShotCooldown, () =>
+            {
+                CanAttack = true;
+            }, runOnce: true);
+    }
+
+    private void EnqueueProjectile(GameObject projectile)
+    {
+        projectilesPool.EnqueueObject(arrowPoolConfigSO.Pools[0].Tag, projectile);
+        projectile.GetComponent<ProjectileController>().onImpactOrExpiration -= EnqueueProjectile;
     }
 
     private void SpendAmmo()
@@ -107,7 +136,7 @@ public class PlayerBase : CharacterBase
         UpdateProjectileEvents(configSO.CurrentProjectile, currentAmmunition);
     }
 
-    public void TakeDamage(float amount)
+    public override void TakeDamage(float amount)
     {
         audioSource?.PlayOneShot(configSO.OnDamageAudioClip, configSO.OnDamageClipVolume);
         
