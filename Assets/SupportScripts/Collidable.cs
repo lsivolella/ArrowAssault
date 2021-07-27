@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Collidable : Object
 {
     protected ContactFilter2D filter;
-    private BoxCollider2D boxCollider;
+    protected BoxCollider2D boxCollider;
     private readonly Collider2D[] hits = new Collider2D[10];
     private readonly Collider2D[] hitsMemory = new Collider2D[10];
     private readonly RaycastHit2D[] results = new RaycastHit2D[10];

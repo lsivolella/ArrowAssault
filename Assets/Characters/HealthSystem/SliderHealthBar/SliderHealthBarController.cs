@@ -18,9 +18,17 @@ public class SliderHealthBarController : MonoBehaviour, IHealthBar
     {
         fullHealthBarMaxScale = fullHealthBar.localScale;
 
-        var xPosition = -1 * transform.localScale.x / 2;
+        PositionBar();
+    }
 
-        transform.localPosition = new Vector3(xPosition, transform.localPosition.y, transform.localPosition.z);
+    private void PositionBar()
+    {
+        if(!transform.parent.TryGetComponent(out SpriteRenderer spriteRenderer))
+            spriteRenderer = transform.parent.GetChild(0).GetComponent<SpriteRenderer>();
+        var xPosition = -1 * transform.localScale.x / 2;
+        var yPosition = spriteRenderer.bounds.size.y + 0.2f;
+
+        transform.localPosition = new Vector2(xPosition, yPosition);
     }
 
     public void Setup(CharacterBase characterBase, float baseHealth)

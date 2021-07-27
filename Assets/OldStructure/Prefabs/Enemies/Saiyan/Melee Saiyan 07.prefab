@@ -51,6 +51,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -177,8 +178,8 @@ BoxCollider2D:
   m_Offset: {x: 0.0037453175, y: 0.001247406}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.3125, y: 2.375}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1.0555556, y: 2.1111112}
     newSize: {x: 1.3125, y: 2.375}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa18fc7969cc5d445ab0cada4215dbdc, type: 3}
   m_Name: fire_ball_pool_so
   m_EditorClassIdentifier: 
-  pools: []
+  pools:
+  - tag: fire_ball
+    objectPrefab: {fileID: 1914553742953215650, guid: 266e8d58970e79844983321b48487d95,
+      type: 3}
+    size: 30

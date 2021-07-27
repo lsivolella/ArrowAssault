@@ -6,10 +6,12 @@ public class RangedEnemyBase : EnemyBase
     [SerializeField] RangedEnemyConfigurationSO rangedConfigSO;
     [SerializeField] PoolConfigurationSO projectilePoolConfigSO;
 
-    private ObjectPooler projectilesPool;
     private Camera gameCam;
     private Timer timer;
+    private ObjectPooler projectilesPool;
+    private Transform projectileTrigger;
     private Plane[] planes;
+
     private bool insideCamera = false;
 
     public bool CanAttack { get; private set; } = true;
@@ -19,6 +21,7 @@ public class RangedEnemyBase : EnemyBase
         base.OnAwake();
 
         projectilesPool = new ObjectPooler(this.gameObject, projectilePoolConfigSO);
+        projectileTrigger = transform.Find("projectile_trigger");
     }
 
     protected override void OnStart()
@@ -31,14 +34,14 @@ public class RangedEnemyBase : EnemyBase
 
     protected override void OnUpdate()
     {
-        CheckTargetPosition();
+        CheckPosition();
 
         base.OnUpdate();  
 
         ShotTarget();
     }
 
-    private void CheckTargetPosition()
+    private void CheckPosition()
     {
         if (!IsAlive) return;
 
@@ -51,30 +54,48 @@ public class RangedEnemyBase : EnemyBase
         insideCamera = GeometryUtility.TestPlanesAABB(planes, BoxCollider.bounds);
     }
 
-    protected override void ProcessMovement()
+    protected override void GetMovementDirection()
     {
+        if (!IsAlive) return;
+
+        if (!CanMove) return;
+
+        if (IsFrozen) return;
+
+        if (!Target) return;
+
         float distanceToTarget = Vector2.Distance(Target.transform.position, transform.position);
-        Vector2 direction;
 
         if (distanceToTarget > rangedConfigSO.RetreatDistance &&
             distanceToTarget < rangedConfigSO.MaxDistance)
             return;
 
         if (distanceToTarget > rangedConfigSO.MaxDistance)
-            direction = Target.transform.position - transform.position;
+            MoveDestination = Target.transform.position - transform.position;
         else
-            direction = transform.position - Target.transform.position;
+            MoveDestination = transform.position - Target.transform.position;
+    }
 
-        Animator.Play("walk");
+    protected override void ProcessMovement()
+    {
+        if (!IsAlive) return;
 
-        Vector2 destnation = Vector2.MoveTowards(transform.position, direction, 
+        if (!CanMove) return;
+
+        if (IsFrozen) return;
+
+        if (!Target) return;
+
+        PlayWalkAnimation();
+
+        Vector2 destination = Vector2.MoveTowards(transform.position, MoveDestination, 
             ConfigSO.MoveSpeed * Time.deltaTime);
-        float clampedXPosition = Mathf.Clamp(destnation.x, -8.5f, 8.5f);
-        float clampedYPosition = Mathf.Clamp(destnation.y, -4.5f, 4.5f);
+        float clampedXPosition = Mathf.Clamp(destination.x, -8.5f, 8.5f);
+        float clampedYPosition = Mathf.Clamp(destination.y, -4.5f, 4.5f);
         transform.position = new Vector2(clampedXPosition, clampedYPosition);
     }
 
-    private void ShotTarget()
+    protected virtual void ShotTarget()
     {
         if (!IsAlive) return;
 
@@ -92,7 +113,7 @@ public class RangedEnemyBase : EnemyBase
 
         var tag = projectilesPool.GetDictionaryTag(0);
         var projectile = projectilesPool.DequeueObject(tag).GetComponent<ProjectileController>();
-        projectile.Setup(transform.position, Quaternion.identity, Target);
+        projectile.Setup(projectileTrigger.position, Quaternion.identity, Target);
         projectile.onImpactOrExpiration += EnqueueProjectile;
 
         timer = new Timer(gameObject.name + "attack_cooldown",
@@ -102,7 +123,7 @@ public class RangedEnemyBase : EnemyBase
             }, runOnce: true);
     }
 
-    private void EnqueueProjectile(GameObject projectile)
+    protected void EnqueueProjectile(GameObject projectile)
     {
         projectilesPool.EnqueueObject(projectilePoolConfigSO.Pools[0].Tag, projectile);
         projectile.GetComponent<ProjectileController>().onImpactOrExpiration -= EnqueueProjectile;

@@ -82,10 +82,13 @@
     <Compile Include="Assets\OldStructure\Scripts\Player\ChangeBowSprite.cs" />
     <Compile Include="Assets\Managers\UI\UIController.cs" />
     <Compile Include="Assets\Characters\Scripts\CharacterBase.cs" />
+    <Compile Include="Assets\Items\Projectiles\Scripts\SeekerProjectileController.cs" />
     <Compile Include="Assets\Items\Projectiles\Scripts\ArrowLootController.cs" />
     <Compile Include="Assets\OldStructure\Scripts\CreditsButtonScript.cs" />
     <Compile Include="Assets\OldStructure\Scripts\HeartLoot.cs" />
     <Compile Include="Assets\SupportScripts\Collectable.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\ChargingSaiyanEnemyBase.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\MeleeSaiyanEnemyBase.cs" />
     <Compile Include="Assets\OldStructure\Scripts\ReticleController.cs" />
     <Compile Include="Assets\Items\LootDropConfigurationSO.cs" />
     <Compile Include="Assets\OldStructure\Scripts\StartGameButtonScript.cs" />
@@ -107,14 +110,15 @@
     <Compile Include="Assets\Characters\Enemies\Scripts\MeleeEnemyBase.cs" />
     <Compile Include="Assets\OldStructure\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Characters\HealthSystem\HeartsLifebar\HeartsHealthBarController.cs" />
+    <Compile Include="Assets\Items\Projectiles\Scripts\ProjectileController.cs" />
     <Compile Include="Assets\Characters\Player\PlayerBase.cs" />
     <Compile Include="Assets\Characters\Player\PlayerConfigurationSO.cs" />
     <Compile Include="Assets\Characters\Enemies\Scripts\RangedEnemyConfigurationSO.cs" />
     <Compile Include="Assets\OldStructure\Scripts\EnemySpawner.cs" />
     <Compile Include="Assets\OldStructure\Scripts\EmptyLootScript.cs" />
     <Compile Include="Assets\Items\Projectiles\Scripts\PoolConfigurationSO.cs" />
-    <Compile Include="Assets\Items\Projectiles\Scripts\SeekerProjectileController.cs" />
-    <Compile Include="Assets\Items\Projectiles\Scripts\ProjectileController.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\SuperTreantEnemyBase.cs" />
+    <Compile Include="Assets\Characters\Enemies\Scripts\SuperTreantConfigurationSO.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />

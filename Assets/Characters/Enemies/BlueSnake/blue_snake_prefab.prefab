@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &821776629936993627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4321800586653609334}
+  m_Layer: 8
+  m_Name: projectile_trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4321800586653609334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821776629936993627}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.112, y: 0.543, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2572655857136523870}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2572655857136523810
 GameObject:
   m_ObjectHideFlags: 0
@@ -33,6 +63,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 94533748407436584}
+  - {fileID: 4321800586653609334}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -131,10 +162,10 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.017091632, y: -0.0776891}
+  m_Offset: {x: -0.017091632, y: 0.47126892}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.5, y: 0}
     oldSize: {x: 1, y: 1}
     newSize: {x: 2, y: 2}
     adaptiveTilingThreshold: 0.5
@@ -142,7 +173,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7234268, y: 0.8446218}
+  m_Size: {x: 0.7234268, y: 0.9449422}
   m_EdgeRadius: 0
 --- !u!95 &2572655857136523869
 Animator:
@@ -178,12 +209,12 @@ PrefabInstance:
     - target: {fileID: 2520943967169397538, guid: dc784955a35a3fc429c8a54ac9d54aab,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.25
+      value: -0.203
       objectReference: {fileID: 0}
     - target: {fileID: 2520943967169397538, guid: dc784955a35a3fc429c8a54ac9d54aab,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.563
+      value: 1.054
       objectReference: {fileID: 0}
     - target: {fileID: 2520943967169397538, guid: dc784955a35a3fc429c8a54ac9d54aab,
         type: 3}

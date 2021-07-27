@@ -15,18 +15,17 @@ public class EnemyBase : CharacterBase
     public EnemiesConfigurationSO ConfigSO { get { return configSO; } }
     public bool IsFrozen { get; private set; } = false; // TODO: check real necessity
     public bool CanMove { get; private set; } = true;
-    public Vector2 MoveDirection { get; set; }
+    public Vector2 MoveDestination { get; set; }
     public GameObject Target { get; private set; }
 
     // General Cached References
-    private HealthSystem healthSystem;
-    private SpriteRenderer spriteRenderer;
-    private AudioSource audioSource;
-    private Animator animator;
-    private LootController lootController;
-    private ObjectPooler lootPooler;
+    protected HealthSystem healthSystem;
+    protected SpriteRenderer spriteRenderer;
+    protected AudioSource audioSource;
+    protected Animator animator;
+    protected LootController lootController;
+    protected ObjectPooler lootPooler;
 
-    public Animator Animator { get { return animator; } }
 
     // take damage (-life and damage blink)
     // finder?
@@ -42,7 +41,7 @@ public class EnemyBase : CharacterBase
 
     }
 
-    private void GetComponents()
+    protected virtual void GetComponents()
     {
         healthSystem = GetComponent<HealthSystem>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -65,13 +64,13 @@ public class EnemyBase : CharacterBase
         healthSystem.TakeDamage(amount);
         OnDamageTaken(healthSystem.CurentHealth);
 
-        if (healthSystem.CurentHealth > 0) return;
-
         KillEnemy();
     }
 
-    private void KillEnemy()
+    protected void KillEnemy()
     {
+        if (healthSystem.CurentHealth > 0) return;
+
         OnDeath();
         IsAlive = false;
         //TODO: implement enemy object pulling
@@ -87,8 +86,11 @@ public class EnemyBase : CharacterBase
     {
         base.OnUpdate();
 
+        GetMovementDirection();
         ProcessMovement();
     }
+
+    protected virtual void GetMovementDirection() { }
 
     protected virtual void ProcessMovement()
     {
@@ -102,40 +104,48 @@ public class EnemyBase : CharacterBase
 
         var pos = transform.position;
 
-        var rayCastX = Physics2D.BoxCast(pos, BoxCollider.size / 1.5f, 0, new Vector2(MoveDirection.x, 0),
-            Mathf.Abs(MoveDirection.x * configSO.MoveSpeed * Time.deltaTime), LayerMask.GetMask("Characters", "Interactables"));
-        var rayCastY = Physics2D.BoxCast(pos, BoxCollider.size / 1.5f, 0, new Vector2(0, MoveDirection.y),
-            Mathf.Abs(MoveDirection.y * configSO.MoveSpeed * Time.deltaTime), LayerMask.GetMask("Characters", "Interactables"));
+        var rayCastX = Physics2D.BoxCast(pos, BoxCollider.size / 1.5f, 0, new Vector2(MoveDestination.x, 0),
+            Mathf.Abs(MoveDestination.x * configSO.MoveSpeed * Time.deltaTime), LayerMask.GetMask("Characters", "Interactables"));
+        var rayCastY = Physics2D.BoxCast(pos, BoxCollider.size / 1.5f, 0, new Vector2(0, MoveDestination.y),
+            Mathf.Abs(MoveDestination.y * configSO.MoveSpeed * Time.deltaTime), LayerMask.GetMask("Characters", "Interactables"));
 
         if (rayCastX.collider == null)
         {
-            transform.Translate(MoveDirection.x * configSO.MoveSpeed * Time.deltaTime, 0, 0);
-            animator.Play("walk");
+            transform.Translate(MoveDestination.x * configSO.MoveSpeed * Time.deltaTime, 0, 0);
+            PlayWalkAnimation();
         }
         if (rayCastY.collider == null)
         {
-            transform.Translate(0, MoveDirection.y * configSO.MoveSpeed * Time.deltaTime, 0);
-            animator.Play("walk");
+            transform.Translate(0, MoveDestination.y * configSO.MoveSpeed * Time.deltaTime, 0);
+            PlayWalkAnimation();
         }
+    }
+
+    protected virtual void PlayIdleAnimation()
+    {
+        animator.Play("idle");
+    }
+
+    protected virtual void PlayWalkAnimation()
+    {
+        animator.Play("walk");
     }
 
     protected override void OnCollideEnter(Collider2D collider)
     {
-        base.OnCollideEnter(collider);
-
         if (!collider.gameObject.CompareTag("Player")) return;
 
         //TODO: remove int casting
-        collider.gameObject.GetComponent<PlayerBase>().TakeDamage((int)configSO.MeleeDamage);
+        collider.gameObject.GetComponent<PlayerBase>().TakeDamage((int)ConfigSO.MeleeDamage);
         StartCoroutine(FlinchAfterCollision());
     }
 
     IEnumerator FlinchAfterCollision()
     {
         CanMove = false;
-        animator.Play("idle");
+        PlayIdleAnimation();
 
-        yield return new WaitForSeconds(configSO.FlinchDuration);
+        yield return new WaitForSeconds(ConfigSO.FlinchDuration);
 
         CanMove = true;
     }
@@ -144,10 +154,10 @@ public class EnemyBase : CharacterBase
     {
         CanMove = false;
         IsFrozen = true;
-        animator.Play("idle");
+        PlayIdleAnimation();
         spriteRenderer.color = Color.blue;
 
-        yield return new WaitForSeconds(configSO.FreezeDuration);
+        yield return new WaitForSeconds(ConfigSO.FreezeDuration);
 
         CanMove = true;
         IsFrozen = false;

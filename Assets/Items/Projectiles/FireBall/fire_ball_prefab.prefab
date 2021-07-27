@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1914553742953215679}
-  - component: {fileID: 1914553742953215678}
+  - component: {fileID: -679058697902739160}
   - component: {fileID: 1914553742953215649}
   - component: {fileID: 1914553742953215648}
   - component: {fileID: 1914553742953215651}
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1914553742953215678
+--- !u!114 &-679058697902739160
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +43,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1914553742953215650}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b81086adb4f58a942b0b5e662f31095f, type: 3}
+  m_Script: {fileID: 11500000, guid: 68a7880da4d4d104e8dd8c09637e9e09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  configSO: {fileID: 11400000, guid: 7e91642f9f3b3e0479c269f0ca55de8f, type: 2}
+  configSO: {fileID: 11400000, guid: fd0a1a71987d97d4a9f079e640fc4616, type: 2}
 --- !u!212 &1914553742953215649
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_SortingLayerID: 1014066069
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d9e658c4e97e43145ac0e11eb7fdcc01, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0e92a82704097fc438c95cf96bd4080e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -111,18 +111,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.008007288, y: 0.0005020499}
+  m_Offset: {x: -0.0053129196, y: 0.0005020499}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.33333334, y: 0.33333334}
     newSize: {x: 2.625, y: 1.75}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.47760725, y: 0.34275085}
+  m_Size: {x: 0.32133102, y: 0.23068744}
   m_EdgeRadius: 0
 --- !u!95 &1914553742953215651
 Animator:
@@ -134,7 +134,7 @@ Animator:
   m_GameObject: {fileID: 1914553742953215650}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1f6846c9293c33b41afaaeef86243a0a, type: 2}
+  m_Controller: {fileID: 9100000, guid: efe4c97b84974564bac738c5da6184fb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

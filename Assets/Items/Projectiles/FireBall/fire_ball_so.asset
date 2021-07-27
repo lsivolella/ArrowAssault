@@ -15,4 +15,3 @@ MonoBehaviour:
   projectileSpeed: 2
   projectileDamage: 1
   lifeExpectancy: 2
-  isSeeker: 0

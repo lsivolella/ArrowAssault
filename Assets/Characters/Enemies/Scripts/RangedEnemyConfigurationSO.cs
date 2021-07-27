@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Characters /Ranged Enemies Configuration")]
+[CreateAssetMenu(menuName = "Characters/Ranged Enemies Configuration")]
 public class RangedEnemyConfigurationSO : ScriptableObject
 {
     [Header("Movement Variables")]

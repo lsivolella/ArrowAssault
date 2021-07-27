@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa18fc7969cc5d445ab0cada4215dbdc, type: 3}
+  m_Name: targeted_fire_ball_pool_so
+  m_EditorClassIdentifier: 
+  pools:
+  - tag: fire_ball
+    objectPrefab: {fileID: 1914553742953215650, guid: 1eae04ff22382bf40989c80ae4b980dc,
+      type: 3}
+    size: 5
